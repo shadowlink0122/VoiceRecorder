@@ -31,7 +31,7 @@ static int playCallback( const void *inputBuffer, void *outputBuffer,
 	if( data->recontinue != PLAY || framesLeft < framesPerBuffer ){
 		/* final buffer... */
 		for( i=0; i<framesLeft; i++ ){
-			std::cout << *wptr << std::endl;
+			// std::cout << *wptr << std::endl;
 			*wptr++ = *rptr++;  /* left */
 			if( NUM_CHANNELS == 2 ) *wptr++ = *rptr++;  /* right */
 		}
@@ -118,4 +118,3 @@ done:
 	cvDestroyWindow("Graph");
 	return err;
 }
-
