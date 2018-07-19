@@ -1,9 +1,11 @@
 
 #pragma once
 
+#include <limits>
+
 #define SAMPLE_RATE  long(44100)
 #define FRAMES_PER_BUFFER (512)
-#define NUM_SECONDS     long( 60 * 60 )//最大１時間 
+#define NUM_SECONDS     long( 60 * 60 * 24) //最大24時間 
 #define NUM_CHANNELS    (2)
 #define DITHER_FLAG     (0)
 #define WRITE_TO_FILE   (0)
