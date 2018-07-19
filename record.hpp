@@ -60,6 +60,7 @@ int callRecord(paTestData *data){
 	long long           totalFrames;
 	long long           numSamples;
 	long long           numBytes;
+	long long 					times = 0;
 	SAMPLE              max, val;
 	double              average;
 
@@ -109,8 +110,9 @@ int callRecord(paTestData *data){
 
 	// ここで1秒ごとにデータを取ってくる。
 	while( ( err = Pa_IsStreamActive( stream ) ) == 1 ){
+		printf("%lld時間 %lld分 %lld秒\n", times / ( 360 ),times / 60,times ); fflush(stdout);
 		Pa_Sleep(1000);
-		printf("index = %lld\n", data->recordFrameIndex ); fflush(stdout);
+		times++;
 	}
 	if( err < 0 ) goto done;
 
