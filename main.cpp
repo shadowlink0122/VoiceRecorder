@@ -1,6 +1,9 @@
 #include <iostream>
+#include <sqlite3.h>
+#include <zlib.h>
 #include <portaudio.h>
 #include <thread>
+#include <chrono>
 #include <opencv/cv.hpp>
 #include "opencv2/highgui/highgui.hpp"
 #include "mouse.hpp"
@@ -11,11 +14,10 @@
 using namespace std;
 using namespace cv;
 
-
 int main(int argc,const char *argv[]){
 
   const int w = 600;
-  const int h = 600;
+  const int h = 400;
 
   mouseParam event;
   Mat img = Mat::zeros(h,w,CV_8UC3);
@@ -25,7 +27,7 @@ int main(int argc,const char *argv[]){
   stopButton(img,w,h);
   playButton(img,w,h);
   exitButton(img,w,h);
-  drawWave(img,w,h);
+  drawWaveSpace(img,w,h);
   namedWindow(show_name,CV_WINDOW_AUTOSIZE | CV_WINDOW_FREERATIO);
 
   // prot
@@ -39,8 +41,7 @@ int main(int argc,const char *argv[]){
 
   try{
 
-    while(1){
-      
+    while(1){      
       waitKey(20);
 
       if(event.event == EVENT_LBUTTONDOWN){
@@ -60,6 +61,7 @@ int main(int argc,const char *argv[]){
 
           if(trecord.joinable())trecord.join();
 
+          waves(&recordData);
           recordData.recontinue = PLAY;
           trecord = thread(callPlay,&recordData);
           puts("Play");
@@ -80,7 +82,6 @@ int main(int argc,const char *argv[]){
 
         }
       }
-
     }
 
   }
