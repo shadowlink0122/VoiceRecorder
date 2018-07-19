@@ -28,7 +28,7 @@ int main(int argc,const char *argv[]){
   playButton(img,w,h);
   exitButton(img,w,h);
   drawWaveSpace(img,w,h);
-  namedWindow(show_name,CV_WINDOW_AUTOSIZE | CV_WINDOW_FREERATIO);
+  namedWindow(show_name,CV_WINDOW_AUTOSIZE);
 
   // prot
   imshow(show_name,img);
